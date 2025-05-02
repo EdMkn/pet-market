@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -22,20 +21,20 @@ model Product {
   image         String
   stripePriceId String
   isFeatured    Boolean?    @default(false)
-  orderItems    OrderItem[]
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+  orderItems    OrderItem[]
 }
 
 model Order {
   id          String      @id @default(uuid())
-  userId      String? // Firebase Auth UID (optional)
+  userId      String?
   status      OrderStatus @default(PENDING)
   totalAmount Float
   paymentId   String?
-  items       OrderItem[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
+  items       OrderItem[]
 }
 
 model OrderItem {

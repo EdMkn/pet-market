@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { PrismaService } from '../prisma/prisma.service';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { Product } from '../../generated/prisma';
+import { Product } from '@prisma/client';
 
 @Injectable()
 export class ProductsService {
