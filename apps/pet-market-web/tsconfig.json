@@ -7,7 +7,17 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    
+    "composite": false,
+    "emitDeclarationOnly": false,
+    "declaration": false,
+    "moduleResolution": "bundler",
+    "module": "esnext",
+    "lib": [
+      "es2022",
+      "dom"
+    ]
   },
   "files": [],
   "include": [],
