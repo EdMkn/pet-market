@@ -1,7 +1,27 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Int, ID, Float } from '@nestjs/graphql';
+import { OrderItem } from './order-item.entity';
+import { OrderStatus } from '@prisma/client';
 
 @ObjectType()
 export class Order {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => ID)
+  id!: string;
+
+  @Field(() => [OrderItem])
+  items!: OrderItem[];
+
+  @Field(() => Float)
+  totalAmount!: number;
+
+  @Field(() => String)
+  status!: OrderStatus;
+
+  @Field(() => String, { nullable: true })
+  paymentId?: string;
+
+  @Field(() => Date)
+  createdAt!: Date;
+
+  @Field(() => Date)
+  updatedAt!: Date;
 }
