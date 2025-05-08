@@ -2,6 +2,8 @@ import { computed } from '@angular/core';
 import { signalStore, withState, withMethods, patchState, withComputed } from '@ngrx/signals';
 import { Product } from '@prisma/client'
 
+const CART_LOCALSTORAGE_KEY = 'pet_market_cart'
+
 type CartItem = Product & {
     quantity: number;
 }
@@ -17,11 +19,26 @@ const initialState: CartState = {
 export const CartStore = signalStore({
     providedIn: 'root'
 },
-withState(() => initialState),
+withState(() => {
+    if('localStorage' in globalThis) {
+        return {
+            ...initialState,
+            items: JSON.parse(
+                localStorage.getItem(CART_LOCALSTORAGE_KEY) ?? '[]'
+            ) as CartItem[]
+        }
+    }
+    return initialState;
+}),
 withComputed((store) => ({
     totalItems: computed(() =>
         store.items().reduce((acc, items) => {
             return acc + items.quantity;
+        }, 0)
+    ),
+    totalAmount: computed(() =>
+        store.items().reduce((acc, items) => {
+            return acc + items.quantity * items.price;
         }, 0)
     )
 })),
@@ -51,5 +68,30 @@ withMethods((store) => ({
                 }]
             })
         }
-    }
+
+        localStorage.setItem(
+            CART_LOCALSTORAGE_KEY,
+            JSON.stringify(store.items())
+        );
+    },
+    updateQuantity(productId: string, quantity: number) {
+        const updatedItems = store 
+            .items()
+            .map((item) => (item.id === productId ? { ...item, quantity } : item));
+        patchState(store, {items : updatedItems });
+        localStorage.setItem(CART_LOCALSTORAGE_KEY, JSON.stringify(updatedItems)) 
+    },
+    removeFromCart(productId: string) {
+        const updatedItems = store
+          .items()
+          .filter((item) => item.id !== productId);
+        patchState(store, { items: updatedItems });
+        localStorage.setItem(CART_LOCALSTORAGE_KEY, JSON.stringify(updatedItems));
+      },
+      clearCart() {
+        patchState(store, {
+          items: [],
+        });
+        localStorage.removeItem(CART_LOCALSTORAGE_KEY);
+      },
 })))
