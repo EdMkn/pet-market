@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartStore } from '../stores/cart.store';
+import { StripesService } from '../services/stripes.service';
 
 @Component({
   selector: 'app-checkout',
@@ -10,8 +11,11 @@ import { CartStore } from '../stores/cart.store';
 })
 export class CheckoutComponent {
   cartStore = inject(CartStore);
+  stripesService = inject(StripesService);
 
   checkout() {
-    console.log('checking out');
+    this.stripesService.createCheckoutSession().subscribe(({url}) => {
+      location.href = url;
+    });
   }
 }

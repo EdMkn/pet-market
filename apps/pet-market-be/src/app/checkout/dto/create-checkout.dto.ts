@@ -2,6 +2,8 @@ import { IsArray, IsNumber, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CartItemDto {
+  id!: string; // Add this field to match frontend data
+
   productId!: string;
 
   @IsNumber()
