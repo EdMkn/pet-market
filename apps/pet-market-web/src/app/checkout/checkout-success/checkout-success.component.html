@@ -1,4 +1,4 @@
-<!--{<div class="max-w-2xl mx-auto py-8 space-y-8">
+<div class="max-w-2xl mx-auto py-8 space-y-8">
     @if (orderStore.error()) {
     <div class="alert alert-error">
       {{ orderStore.error() }}
@@ -18,7 +18,7 @@
         <h2 class="card-title">Order Summary</h2>
         <div class="space-y-4">
           @defer (on immediate; hydrate never) {
-          <app-order-details [order]="orderStore.orderDetail()" />
+          <app-order-detail [order]="orderStore.orderDetail()" />
           }
         </div>
       </div>
@@ -29,4 +29,4 @@
       <a routerLink="/" class="btn btn-primary">Continue Shopping</a>
     </div>
     }
-  </div>}-->
+  </div>

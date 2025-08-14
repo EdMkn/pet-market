@@ -40,7 +40,7 @@ export class CheckoutService {
         quantity: item.quantity
       })),
       mode: 'payment',
-      success_url: `${process.env.BACKEND_URL || 'http://localhost:3000'}/api/checkout/success?orderID=${order.id}`,
+      success_url: `${process.env.BACKEND_URL || 'http://localhost:3000'}/api/checkout/success?orderId=${order.id}`,
       cancel_url: `${process.env.BACKEND_URL || 'http://localhost:3000'}/api/checkout/cancel`,
       metadata: {
         orderId: order.id,

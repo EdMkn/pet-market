@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartStore } from '../stores/cart.store';
 import { StripesService } from '../services/stripes.service';
+import { OrderDetailComponent } from '../orders/components/order-detail/order-detail.component';
 
 @Component({
   selector: 'app-checkout',
-  imports: [CommonModule],
+  imports: [CommonModule, OrderDetailComponent],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss',
 })

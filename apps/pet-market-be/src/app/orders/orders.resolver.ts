@@ -18,7 +18,7 @@ export class OrdersResolver {
     return this.ordersService.findAll();
   }
 
-  @Query(() => Order, { name: 'order' })
+  @Query(() => Order, { name: 'order', nullable: true })
   findOne(@Args('id', { type: () => String }) id: string) {
     return this.ordersService.findOne(id);
   }
