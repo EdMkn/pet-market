@@ -2,10 +2,11 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CartStore } from '../../stores/cart.store';
+import { ThemeSwitcherComponent } from "../theme-switcher/theme-switcher.component";
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ThemeSwitcherComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
