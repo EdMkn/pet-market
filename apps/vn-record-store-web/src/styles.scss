@@ -2,4 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global theme-aware styles */
+html, body {
+  @apply bg-base-100 text-base-content min-h-screen;
+}
+
+/* Ensure the app root also uses theme colors */
+app-root {
+  @apply block min-h-screen bg-base-100;
+}
+
 /* You can add global styles to this file, and also import other style files */

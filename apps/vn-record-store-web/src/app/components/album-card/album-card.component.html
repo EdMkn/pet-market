@@ -1,21 +1,21 @@
 <div
-  class="card h-full bg-slate-900 shadow-xl hover:-translate-y-2 duration-200"
+  class="card h-full bg-base-200 shadow-xl hover:-translate-y-2 duration-200"
 >
   <figure><img [src]="album().image" [alt]="album().name" /></figure>
   <div class="card-body">
-    <h2 class="card-title text-lg">{{ album().name }}</h2>
-    <p class="text-sm text-gray-400">{{ album().artist }}</p>
+    <h2 class="card-title text-lg text-base-content">{{ album().name }}</h2>
+    <p class="text-sm text-base-content opacity-70">{{ album().artist }}</p>
     <div class="flex flex-wrap gap-2 my-2">
       <span class="badge badge-primary">{{ album().genre }}</span>
       <span class="badge badge-secondary">{{ album().releaseYear }}</span>
     </div>
-    <p class="text-sm text-gray-300">{{ album().description }}</p>
-    <div class="flex justify-between items-center text-xs text-gray-400 mt-2">
+    <p class="text-sm text-base-content opacity-80">{{ album().description }}</p>
+    <div class="flex justify-between items-center text-xs text-base-content opacity-60 mt-2">
       <span>{{ album().trackCount }} pistes</span>
       <span>{{ album().duration }}</span>
     </div>
     <div class="card-actions justify-between items-center mt-4">
-      <span class="text-xl font-bold">{{ album().price }} €</span>
+      <span class="text-xl font-bold text-base-content">{{ album().price }} €</span>
       <button (click)="onAddToCart(album())" class="btn btn-primary">Ajouter au Panier</button>
     </div>
   </div>
