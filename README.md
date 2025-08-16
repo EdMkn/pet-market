@@ -1,115 +1,99 @@
-# PetMarket
+# Vinyl Records Store
 
-An E-commerce website
-(Created Following "Code with Ahsan")
-<details>
-  <summary><h1>nx instructions</h1></summary>
-  <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A modern e-commerce platform for vinyl record enthusiasts, built with Angular, NestJS, and Prisma.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+## Features
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+- **Vinyl Album Catalog**: Browse a curated collection of classic and modern vinyl records
+- **Genre Filtering**: Filter albums by genre (Rock, Pop, Hip Hop, R&B, etc.)
+- **Search Functionality**: Search albums by title, artist, or genre
+- **Shopping Cart**: Add albums to cart with quantity management
+- **Secure Checkout**: Integrated Stripe payment processing
+- **Responsive Design**: Beautiful, modern UI that works on all devices
 
-## Generate a library
+## Tech Stack
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+- **Frontend**: Angular 19 with NgRx Signals
+- **Backend**: NestJS with GraphQL
+- **Database**: PostgreSQL with Prisma ORM
+- **Styling**: Tailwind CSS with DaisyUI
+- **Payment**: Stripe integration
+- **Build Tool**: Nx monorepo
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- PostgreSQL database
+- Stripe account (for payments)
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   ```bash
+   # Backend (.env in apps/pet-market-be/)
+   DATABASE_URL="postgresql://..."
+   STRIPE_SECRET_KEY="sk_..."
+   ```
+
+4. Run database migrations:
+   ```bash
+   cd apps/pet-market-be
+   npx prisma migrate dev
+   npx prisma db seed
+   ```
+
+5. Start the development servers:
+   ```bash
+   # Backend
+   npx nx serve pet-market-be
+   
+   # Frontend
+   npx nx serve pet-market-web
+   ```
+
+## Project Structure
+
+```
+apps/
+├── pet-market-web/          # Angular frontend
+├── pet-market-be/           # NestJS backend
+└── pet-markt-assets/        # Static assets
+
+packages/                    # Shared libraries
 ```
 
-## Run tasks
+## Album Collection
 
-To build the library use:
+The store features a carefully curated selection of vinyl records including:
 
-```sh
-npx nx build pkg1
-```
+- **Classic Rock**: The Beatles, Led Zeppelin, Pink Floyd
+- **Pop**: Michael Jackson, Madonna, Prince
+- **Hip Hop**: Dr. Dre, Nas, Lauryn Hill
+- **Alternative**: Nirvana, Radiohead, Neutral Milk Hotel
 
-To run any task with Nx use:
+Each album includes detailed information:
+- Artist name
+- Release year
+- Genre classification
+- Track count and duration
+- High-quality album artwork
 
-```sh
-npx nx <target> <project-name>
-```
+## Contributing
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## License
 
-## Versioning and releasing
-
-To version and release the library use
-
-```
-npx nx release
-```
-
-Pass `--dry-run` to see what would happen without actually releasing the library.
-
-[Learn more about Nx release &raquo;](hhttps://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Keep TypeScript project references up to date
-
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
-```
-
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
-
-```sh
-npx nx sync:check
-```
-
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
-
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
-```
-
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-</details>
+MIT License - see LICENSE file for details.

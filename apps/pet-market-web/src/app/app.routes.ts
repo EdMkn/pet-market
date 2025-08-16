@@ -14,10 +14,10 @@ export const appRoutes: Route[] = [
         }
     },
     {
-        path: 'products',
+        path: 'albums',
         loadComponent: async () => {
-            const mod = await import('./products/products.component');
-            return mod.ProductsComponent;
+            const mod = await import('./albums/albums.component');
+            return mod.AlbumsComponent;
         }
     },
     {

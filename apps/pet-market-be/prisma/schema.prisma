@@ -13,17 +13,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Product {
+model Album {
   id            String      @id @default(uuid())
   name          String
+  artist        String
   description   String
   price         Float
   image         String
+  genre         String
+  releaseYear   Int
+  trackCount    Int
+  duration      String      // Format: "45:30" (minutes:seconds)
   stripePriceId String
   isFeatured    Boolean?    @default(false)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
-  orderItems    OrderItem[]
+  albumOrderItems AlbumOrderItem[]
 }
 
 model Order {
@@ -34,17 +39,17 @@ model Order {
   paymentId   String?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
-  items       OrderItem[]
+  albumItems  AlbumOrderItem[]
 }
 
-model OrderItem {
+model AlbumOrderItem {
   id        String  @id @default(uuid())
   orderId   String
-  productId String
+  albumId   String
   quantity  Int
   price     Float
   order     Order   @relation(fields: [orderId], references: [id])
-  product   Product @relation(fields: [productId], references: [id])
+  album     Album   @relation(fields: [albumId], references: [id])
 }
 
 enum OrderStatus {

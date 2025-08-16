@@ -4,16 +4,16 @@
       <div class="flex items-center gap-4 flex-1">
         <div class="avatar">
           <div class="w-16 h-16 rounded">
-            <img [src]="item.product.image" [alt]="item.product.name" />
+            <img [src]="item.album.image" [alt]="item.album.name" />
           </div>
         </div>
         <div>
-          <h3 class="font-semibold">{{ item.product.name }}</h3>
-          <span class="text-sm text-gray-300">Quantity: {{ item.quantity }}</span>
+          <h3 class="font-semibold">{{ item.album.name }}</h3>
+          <span class="text-sm text-gray-300">Quantité: {{ item.quantity }}</span>
         </div>
       </div>
       <span class="font-semibold"
-        >${{ item.price * item.quantity | number : "1.2-2" }}</span
+        >{{ item.price * item.quantity | number : "1.2-2" }} €</span
       >
     </div>
     }
@@ -21,12 +21,12 @@
     
     <div class="flex justify-between items-center font-bold">
       <span>Total</span>
-      <span>${{ order()?.totalAmount | number : "1.2-2" }}</span>
+      <span>{{ order()?.totalAmount | number : "1.2-2" }} €</span>
     </div>
     
     <div class="text-sm text-gray-300">
-      <p>Status: {{ order()?.status }}</p>
-      <p>Order Date: {{ order()?.createdAt | date : "medium" }}</p>
+      <p>Statut: {{ order()?.status }}</p>
+      <p>Date de commande: {{ order()?.createdAt | date : "medium" }}</p>
     </div>
 </div>
     

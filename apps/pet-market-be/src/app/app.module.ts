@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import { ProductsModule } from './products/products.module';
+import { AlbumsModule } from './albums/albums.module';
 import { CheckoutModule } from './checkout/checkout.module';
 import { OrdersModule } from './orders/orders.module';
 
@@ -14,7 +14,7 @@ import { OrdersModule } from './orders/orders.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'apps/pet-market-be/dist/schema.gql'),
     }),
-    ProductsModule,
+    AlbumsModule,
     CheckoutModule,
     OrdersModule,
   ],

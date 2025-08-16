@@ -1,27 +1,101 @@
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-    <div class="space-y-6">
-      <h2 class="text-2xl font-bold">Order Summary</h2>
-      @for (item of cartStore.items(); track item.id) {
-      <div class="flex justify-between items-center">
-        <div>
-          <p class="font-semibold">{{ item.name }}</p>
-          <p class="text-sm text-gray-300">Quantity: {{ item.quantity }}</p>
+<div class="min-h-screen bg-slate-900 py-8">
+  <div class="container mx-auto px-4">
+    <h1 class="text-3xl font-bold text-white mb-8 text-center">Paiement</h1>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Order Summary - Takes 2/3 of the space -->
+      <div class="lg:col-span-2 space-y-6">
+        <div class="bg-slate-800 rounded-lg p-6">
+          <h2 class="text-2xl font-bold text-white mb-6">Résumé de la Commande</h2>
+          
+          @if (cartStore.items().length === 0) {
+            <div class="text-center py-8">
+              <p class="text-gray-400 mb-4">Votre panier est vide</p>
+              <a routerLink="/albums" class="btn btn-primary">Parcourir les Albums</a>
+            </div>
+          } @else {
+            <div class="space-y-4">
+              @for (item of cartStore.items(); track item.id) {
+                <div class="flex items-center gap-4 p-4 bg-slate-700 rounded-lg">
+                  <img [src]="item.image" [alt]="item.name" class="w-16 h-16 object-cover rounded">
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-white">{{ item.name }}</h3>
+                    <p class="text-gray-400 text-sm">{{ item.artist }}</p>
+                    <p class="text-gray-400 text-sm">{{ item.genre }} • {{ item.releaseYear }}</p>
+                  </div>
+                  <div class="text-right">
+                    <div class="flex items-center gap-2 mb-2">
+                      <button 
+                        class="btn btn-sm btn-circle" 
+                        (click)="cartStore.updateQuantity(item.id, item.quantity - 1)"
+                        [disabled]="item.quantity <= 1">
+                        -
+                      </button>
+                      <span class="text-white">{{ item.quantity }}</span>
+                      <button 
+                        class="btn btn-sm btn-circle" 
+                        (click)="cartStore.updateQuantity(item.id, item.quantity + 1)">
+                        +
+                      </button>
+                    </div>
+                    <p class="font-bold text-white">{{ (item.price * item.quantity) | number : "1.2-2" }} €</p>
+                    <button 
+                      class="btn btn-sm btn-error mt-2" 
+                      (click)="cartStore.removeFromCart(item.id)">
+                      Supprimer
+                    </button>
+                  </div>
+                </div>
+              }
+            </div>
+          }
         </div>
-        <p>${{ item.price * item.quantity }}</p>
       </div>
-      }
-      <div class="divider"></div>
-      <div class="flex justify-between items-center font-bold">
-        <p>Total</p>
-        <p>${{ cartStore.totalAmount() | number : "1.2-2" }}</p>
+
+      <!-- Payment Section - Sticky sidebar -->
+      <div class="lg:col-span-1">
+        <div class="bg-slate-800 rounded-lg p-6 sticky top-8">
+          <h2 class="text-2xl font-bold text-white mb-6">Résumé du Paiement</h2>
+          
+          @if (cartStore.items().length > 0) {
+            <div class="space-y-4 mb-6">
+              <div class="flex justify-between text-gray-300">
+                <span>Sous-total ({{ cartStore.totalItems() }} articles)</span>
+                <span>{{ cartStore.totalAmount() | number : "1.2-2" }} €</span>
+              </div>
+              <div class="flex justify-between text-gray-300">
+                <span>Livraison</span>
+                <span>Gratuite</span>
+              </div>
+              <div class="divider my-4"></div>
+              <div class="flex justify-between text-xl font-bold text-white">
+                <span>Total</span>
+                <span>{{ cartStore.totalAmount() | number : "1.2-2" }} €</span>
+              </div>
+            </div>
+            
+            <button 
+              class="btn btn-primary w-full btn-lg" 
+              (click)="checkout()"
+              [disabled]="cartStore.items().length === 0">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"/>
+              </svg>
+              Payer avec Stripe
+            </button>
+            
+            <p class="text-xs text-gray-400 mt-4 text-center">
+              Votre paiement est sécurisé par Stripe
+            </p>
+          } @else {
+            <div class="text-center py-8">
+              <p class="text-gray-400 mb-4">Aucun article dans le panier</p>
+              <a routerLink="/albums" class="btn btn-primary">Continuer les Achats</a>
+            </div>
+          }
+        </div>
       </div>
-    </div>
-  
-    <div class="space-y-6">
-      <h2 class="text-2xl font-bold">Payment</h2>
-      <button class="btn btn-primary w-full" (click)="checkout()">
-        Pay with Stripe
-      </button>
     </div>
   </div>
+</div>
   

@@ -1,1 +1,118 @@
-<p>home works!</p>
+<div class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+  <!-- Hero Section -->
+  <div class="hero min-h-screen" style="background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+    <div class="hero-overlay bg-opacity-60"></div>
+    <div class="hero-content text-center text-neutral-content">
+      <div class="max-w-md">
+        <h1 class="mb-5 text-5xl font-bold">Disques Vinyles</h1>
+        <p class="mb-5">Découvrez des classiques intemporels et des chefs-d'œuvre modernes sur vinyle. Des légendes du rock aux perles indie, trouvez votre prochain album préféré.</p>
+        <button class="btn btn-primary" routerLink="/albums">Parcourir les Albums</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Albums Section -->
+  <div class="py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-white mb-4">Albums Vedettes</h2>
+        <p class="text-gray-300 text-lg">Des classiques sélectionnés qui méritent leur place dans toute collection</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Featured Album Cards -->
+        <div class="card bg-slate-800 shadow-xl hover:-translate-y-2 duration-200">
+          <figure><img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Abbey Road" /></figure>
+          <div class="card-body">
+            <h3 class="card-title text-white">Abbey Road</h3>
+            <p class="text-gray-400">The Beatles</p>
+            <div class="flex gap-2">
+              <span class="badge badge-primary">Rock</span>
+              <span class="badge badge-secondary">1969</span>
+            </div>
+            <p class="text-gray-300">L'album final iconique enregistré par The Beatles</p>
+            <div class="card-actions justify-between items-center">
+              <span class="text-xl font-bold text-white">24,99 €</span>
+              <button class="btn btn-primary">Ajouter au Panier</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card bg-slate-800 shadow-xl hover:-translate-y-2 duration-200">
+          <figure><img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Thriller" /></figure>
+          <div class="card-body">
+            <h3 class="card-title text-white">Thriller</h3>
+            <p class="text-gray-400">Michael Jackson</p>
+            <div class="flex gap-2">
+              <span class="badge badge-primary">Pop</span>
+              <span class="badge badge-secondary">1982</span>
+            </div>
+            <p class="text-gray-300">L'album le plus vendu de tous les temps</p>
+            <div class="card-actions justify-between items-center">
+              <span class="text-xl font-bold text-white">19,99 €</span>
+              <button class="btn btn-primary">Ajouter au Panier</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card bg-slate-800 shadow-xl hover:-translate-y-2 duration-200">
+          <figure><img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Dark Side of the Moon" /></figure>
+          <div class="card-body">
+            <h3 class="card-title text-white">The Dark Side of the Moon</h3>
+            <p class="text-gray-400">Pink Floyd</p>
+            <div class="flex gap-2">
+              <span class="badge badge-primary">Rock Progressif</span>
+              <span class="badge badge-secondary">1973</span>
+            </div>
+            <p class="text-gray-300">Un chef-d'œuvre du rock progressif</p>
+            <div class="card-actions justify-between items-center">
+              <span class="text-xl font-bold text-white">22,99 €</span>
+              <button class="btn btn-primary">Ajouter au Panier</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Genres Section -->
+  <div class="py-16 px-4 bg-slate-800">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-white mb-4">Explorer les Genres</h2>
+        <p class="text-gray-300 text-lg">Trouvez votre son parfait</p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="text-center p-6 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors cursor-pointer">
+          <div class="text-4xl mb-4">🎸</div>
+          <h3 class="text-white font-semibold">Rock</h3>
+        </div>
+        <div class="text-center p-6 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors cursor-pointer">
+          <div class="text-4xl mb-4">🎤</div>
+          <h3 class="text-white font-semibold">Pop</h3>
+        </div>
+        <div class="text-center p-6 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors cursor-pointer">
+          <div class="text-4xl mb-4">🎧</div>
+          <h3 class="text-white font-semibold">Hip Hop</h3>
+        </div>
+        <div class="text-center p-6 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors cursor-pointer">
+          <div class="text-4xl mb-4">🎹</div>
+          <h3 class="text-white font-semibold">R&B</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Call to Action -->
+  <div class="py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold text-white mb-4">Commencez Votre Collection Aujourd'hui</h2>
+      <p class="text-gray-300 text-lg mb-8">Rejoignez des milliers d'amoureux de musique qui nous font confiance pour leurs besoins en vinyle</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button class="btn btn-primary btn-lg" routerLink="/albums">Parcourir Tous les Albums</button>
+        <button class="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-slate-900">En Savoir Plus</button>
+      </div>
+    </div>
+  </div>
+</div>

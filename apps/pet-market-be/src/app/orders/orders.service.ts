@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CreateOrderInput } from './dto/create-order.input';
-import { UpdateOrderInput } from './dto/update-order.input';
 import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
+import { CreateOrderInput } from './dto/create-order.input';
 
 @Injectable()
 export class OrdersService {
@@ -9,27 +9,27 @@ export class OrdersService {
 
   }
   create(createOrderInput: CreateOrderInput) {
-    const {totalAmount, items} = createOrderInput;
+    const {totalAmount, albumItems} = createOrderInput;
     return this.prisma.order.create({
       data: {
         totalAmount,
         status: 'PENDING',
-        items: {
-          create: items.map((item) => ({
+        albumItems: {
+          create: albumItems.map((item) => ({
             quantity: item.quantity,
             price: item.price,
-            product: {
+            album: {
               connect: {
-                id: item.productId
+                id: item.albumId
               },
             },
           })),
         },
       },
       include: {
-        items: {
+        albumItems: {
           include: {
-            product: true
+            album: true
           }
         }
       }
@@ -39,9 +39,9 @@ export class OrdersService {
   findAll() {
     return this.prisma.order.findMany({
       include: {
-        items: {
+        albumItems: {
           include: {
-            product: true,
+            album: true,
           },
         },
       },
@@ -52,20 +52,25 @@ export class OrdersService {
     return this.prisma.order.findUnique({
       where: { id },
       include: {
-        items: {
+        albumItems: {
           include: {
-            product: true,
+            album: true,
           },
         },
       },
     });
   }
 
-  update(id: number, updateOrderInput: UpdateOrderInput) {
-    return `This action updates a #${id} order`;
+  update(id: string, updateOrderInput: Prisma.OrderUpdateInput) {
+    return this.prisma.order.update({
+      where: { id },
+      data: updateOrderInput,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} order`;
+    remove(id: string) {
+    return this.prisma.order.delete({
+      where: { id },
+    });
   }
 }

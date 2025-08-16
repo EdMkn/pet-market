@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCheckoutDto } from './dto/create-checkout.dto';
-import { UpdateCheckoutDto } from './dto/update-checkout.dto';
 import { OrdersService } from '../orders/orders.service';
 import { Stripe } from 'stripe'
 const stripeSecret = process.env.STRIPE_SECRET;
@@ -16,20 +15,20 @@ export class CheckoutService {
   }
   
   async create(createCheckoutDto: CreateCheckoutDto) {
-    // Transform items to include productId from id
-    const orderItems = createCheckoutDto.items.map(item => ({
-      productId: item.id, // Map id to productId
+    // Transform albumItems to include albumId from id
+    const orderAlbumItems = createCheckoutDto.albumItems.map(item => ({
+      albumId: item.id, // Map id to albumId
       quantity: item.quantity,
       price: item.price
     }));
 
     const order = await this.ordersService.create({
-      items: orderItems,
+      albumItems: orderAlbumItems,
       totalAmount: createCheckoutDto.totalAmount
     });
 
     const session = await stripe.checkout.sessions.create({
-      line_items: createCheckoutDto.items.map((item) => ({
+      line_items: createCheckoutDto.albumItems.map((item) => ({
         price_data: {
           currency: 'usd',
           product_data: {

@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import {patchState, signalStore, withMethods, withState} from '@ngrx/signals';
-import { Order, OrderItem, Product } from '@prisma/client';
+import { Order, AlbumOrderItem, Album } from '@prisma/client';
 import { Apollo, gql } from 'apollo-angular';
 import { tap } from 'rxjs';
 
@@ -15,7 +15,7 @@ const GET_ORDER = gql`
                 id
                 quantity
                 price
-                product {
+                album {
                     id
                     name
                     price
@@ -26,11 +26,11 @@ const GET_ORDER = gql`
     }
 `;
 
-type OrderItemWithProduct = OrderItem & {
-    product: Product ;
+type OrderItemWithAlbum = AlbumOrderItem & {
+    album: Album ;
 };
 
-export type OrderWithItems = Order & {items: OrderItemWithProduct[]};
+export type OrderWithItems = Order & {items: OrderItemWithAlbum[]};
 
 type OrderState = {
     orders: OrderWithItems[];

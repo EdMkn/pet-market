@@ -1,10 +1,10 @@
 import { computed } from '@angular/core';
 import { signalStore, withState, withMethods, patchState, withComputed } from '@ngrx/signals';
-import { Product } from '@prisma/client'
+import { Album } from '@prisma/client'
 
-const CART_LOCALSTORAGE_KEY = 'pet_market_cart'
+const CART_LOCALSTORAGE_KEY = 'vinyl_records_cart'
 
-type CartItem = Product & {
+type CartItem = Album & {
     quantity: number;
 }
 
@@ -43,13 +43,13 @@ withComputed((store) => ({
     )
 })),
 withMethods((store) => ({
-    addToCart(product: Product, quantity = 1){
+    addToCart(album: Album, quantity = 1){
         const currentItems = store.items();
-        const existingItem = currentItems.find(cartItem => cartItem.id === product.id);
+        const existingItem = currentItems.find(cartItem => cartItem.id === album.id);
 
         if(existingItem) {
             const updatedItems = store.items().map((cartItem) => {
-                if (cartItem.id === product.id) {
+                if (cartItem.id === album.id) {
                     return {
                         ...cartItem,
                         quantity: cartItem.quantity + quantity
@@ -63,7 +63,7 @@ withMethods((store) => ({
         } else {
             patchState(store, {
                 items: [...store.items(), {
-                    ...product,
+                    ...album,
                     quantity
                 }]
             })
@@ -74,17 +74,17 @@ withMethods((store) => ({
             JSON.stringify(store.items())
         );
     },
-    updateQuantity(productId: string, quantity: number) {
+    updateQuantity(albumId: string, quantity: number) {
         const updatedItems = store 
             .items()
-            .map((item) => (item.id === productId ? { ...item, quantity } : item));
+            .map((item) => (item.id === albumId ? { ...item, quantity } : item));
         patchState(store, {items : updatedItems });
         localStorage.setItem(CART_LOCALSTORAGE_KEY, JSON.stringify(updatedItems)) 
     },
-    removeFromCart(productId: string) {
+    removeFromCart(albumId: string) {
         const updatedItems = store
           .items()
-          .filter((item) => item.id !== productId);
+          .filter((item) => item.id !== albumId);
         patchState(store, { items: updatedItems });
         localStorage.setItem(CART_LOCALSTORAGE_KEY, JSON.stringify(updatedItems));
       },

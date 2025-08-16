@@ -4,7 +4,7 @@ import { Type } from 'class-transformer';
 export class CartItemDto {
   id!: string; // Add this field to match frontend data
 
-  productId!: string;
+  albumId!: string;
 
   @IsNumber()
   quantity!: number;
@@ -20,7 +20,7 @@ export class CreateCheckoutDto {
     @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CartItemDto)
-  items!: CartItemDto[];
+  albumItems!: CartItemDto[];
 
   @IsNumber()
   totalAmount!: number;

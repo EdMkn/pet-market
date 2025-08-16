@@ -7,7 +7,7 @@ import {
 } from '@angular/platform-browser';
 import { provideApollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
-import { InMemoryCache } from '@apollo/client/cache';
+import { InMemoryCache } from '@apollo/client';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {

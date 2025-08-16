@@ -16,15 +16,16 @@ export class StripesService {
 
     return this.http.post<{url: string}>(
       'http://localhost:3000/api/checkout', 
-      {items: items.map((item) => ({
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-        stripePriceId: item.stripePriceId
-      })),
-      totalAmount,
-    }
+      {
+        albumItems: items.map((item) => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          stripePriceId: item.stripePriceId
+        })),
+        totalAmount,
+      }
     );
 
   }

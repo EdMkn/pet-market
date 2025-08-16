@@ -1,5 +1,5 @@
 import { ObjectType, Field, Int, ID, Float } from '@nestjs/graphql';
-import { OrderItem } from './order-item.entity';
+import { AlbumOrderItem } from './album-order-item.entity';
 import { OrderStatus } from '@prisma/client';
 
 @ObjectType()
@@ -7,8 +7,8 @@ export class Order {
   @Field(() => ID)
   id!: string;
 
-  @Field(() => [OrderItem])
-  items!: OrderItem[];
+  @Field(() => [AlbumOrderItem])
+  albumItems!: AlbumOrderItem[];
 
   @Field(() => Float)
   totalAmount!: number;

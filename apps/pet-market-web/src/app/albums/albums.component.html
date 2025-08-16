@@ -1,0 +1,110 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-8">
+  <div class="container mx-auto px-4">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-white mb-4">Collection de Vinyles</h1>
+      <p class="text-gray-300 text-lg">Découvrez des classiques intemporels et des chefs-d'œuvre modernes</p>
+    </div>
+
+    <!-- Search and Filters -->
+    <div class="mb-8 bg-slate-800 p-6 rounded-lg">
+      <div class="flex flex-col lg:flex-row gap-4 items-center">
+        <!-- Search input -->
+        <div class="flex-1 w-full lg:w-auto">
+          <input
+            type="text"
+            placeholder="Rechercher des albums, artistes ou genres..."
+            class="input input-bordered w-full bg-slate-700 text-white placeholder-gray-400"
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="onSearch(searchTerm)"
+          />
+        </div>
+        
+        <!-- Genre filter -->
+        <div class="flex gap-2 flex-wrap">
+          <button 
+            class="btn btn-sm" 
+            [class.btn-primary]="selectedGenre === ''"
+            [class.btn-outline]="selectedGenre !== ''"
+            (click)="filterByGenre('')">
+            Tous
+          </button>
+          <button 
+            class="btn btn-sm" 
+            [class.btn-primary]="selectedGenre === 'Rock'"
+            [class.btn-outline]="selectedGenre !== 'Rock'"
+            (click)="filterByGenre('Rock')">
+            Rock
+          </button>
+          <button 
+            class="btn btn-sm" 
+            [class.btn-primary]="selectedGenre === 'Pop'"
+            [class.btn-outline]="selectedGenre !== 'Pop'"
+            (click)="filterByGenre('Pop')">
+            Pop
+          </button>
+          <button 
+            class="btn btn-sm" 
+            [class.btn-primary]="selectedGenre === 'Hip Hop'"
+            [class.btn-outline]="selectedGenre !== 'Hip Hop'"
+            (click)="filterByGenre('Hip Hop')">
+            Hip Hop
+          </button>
+          <button 
+            class="btn btn-sm" 
+            [class.btn-primary]="selectedGenre === 'R&B'"
+            [class.btn-outline]="selectedGenre !== 'R&B'"
+            (click)="filterByGenre('R&B')">
+            R&B
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    @if(albumStore.loading()) {
+    <div class="flex justify-center items-center py-16">
+      <div class="loading loading-spinner loading-lg text-primary"></div>
+    </div>
+    }
+
+    <!-- Error State -->
+    @else if (albumStore.error()) {
+    <div class="alert alert-error max-w-md mx-auto">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="stroke-current shrink-0 h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+      <span>{{ albumStore.error() }}</span>
+    </div>
+    }
+
+    <!-- Albums Grid -->
+    @else if (albumStore.albums().length) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr">
+      @for (album of albumStore.albums(); track album.id) {
+      <app-album-card (addToCart)="cartStore.addToCart($event)" [album]="album" />
+      }
+    </div>
+    }
+
+    <!-- No Results -->
+    @else {
+    <div class="text-center py-16">
+      <div class="text-6xl mb-4">🎵</div>
+      <h3 class="text-2xl font-bold text-white mb-2">Aucun album trouvé</h3>
+      <p class="text-gray-400 mb-6">Essayez de modifier vos critères de recherche</p>
+      <button class="btn btn-primary" (click)="clearSearch()">Effacer la Recherche</button>
+    </div>
+    }
+  </div>
+</div>
