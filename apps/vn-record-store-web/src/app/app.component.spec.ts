@@ -15,13 +15,13 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome pet-market-web'
+      'Welcome vn-record-store-web'
     );
   });
 
-  it(`should have as title 'pet-market-web'`, () => {
+  it(`should have as title 'vn-record-store-web'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('pet-market-web');
+    expect(app.title).toEqual('vn-record-store-web');
   });
 });

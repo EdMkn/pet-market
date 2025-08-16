@@ -4,13 +4,13 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/pet-market-be-e2e"
+      "path": "./apps/vn-record-store-be-e2e"
     },
     {
-      "path": "./apps/pet-market-be"
+      "path": "./apps/vn-record-store-be"
     },
     {
-      "path": "./apps/pet-market-web-e2e"
+      "path": "./apps/vn-record-store-web-e2e"
     }
   ]
 }

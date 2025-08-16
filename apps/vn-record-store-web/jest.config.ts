@@ -1,8 +1,8 @@
 export default {
-  displayName: 'pet-market-web',
+  displayName: 'vn-record-store-web',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/pet-market-web',
+  coverageDirectory: '../../coverage/apps/vn-record-store-web',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

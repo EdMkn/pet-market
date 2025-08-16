@@ -24,7 +24,7 @@ export default defineConfig({
   },
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npx nx run pet-market-web:serve',
+    command: 'npx nx run vn-record-store-web:serve',
     url: 'http://localhost:4200',
     reuseExistingServer: !process.env.CI,
     cwd: workspaceRoot,

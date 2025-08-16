@@ -38,14 +38,14 @@ A modern e-commerce platform for vinyl record enthusiasts, built with Angular, N
 
 3. Set up environment variables:
    ```bash
-   # Backend (.env in apps/pet-market-be/)
+   # Backend (.env in apps/vn-record-store-be/)
    DATABASE_URL="postgresql://..."
    STRIPE_SECRET_KEY="sk_..."
    ```
 
 4. Run database migrations:
    ```bash
-   cd apps/pet-market-be
+   cd apps/vn-record-store-be
    npx prisma migrate dev
    npx prisma db seed
    ```
@@ -53,18 +53,18 @@ A modern e-commerce platform for vinyl record enthusiasts, built with Angular, N
 5. Start the development servers:
    ```bash
    # Backend
-   npx nx serve pet-market-be
+   npx nx serve vn-record-store-be
    
    # Frontend
-   npx nx serve pet-market-web
+   npx nx serve vn-record-store-web
    ```
 
 ## Project Structure
 
 ```
 apps/
-├── pet-market-web/          # Angular frontend
-├── pet-market-be/           # NestJS backend
+├── vn-record-store-web/          # Angular frontend
+├── vn-record-store-be/           # NestJS backend
 └── pet-markt-assets/        # Static assets
 
 packages/                    # Shared libraries

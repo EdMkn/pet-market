@@ -1,5 +1,5 @@
 {
-  "name": "@pet-market/pet-market-be",
+  "name": "@vn-record-store/vn-record-store-be",
   "version": "0.0.1",
   "private": true,
   "nx": {
@@ -27,15 +27,15 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@pet-market/pet-market-be:build",
+          "buildTarget": "@vn-record-store/vn-record-store-be:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "@pet-market/pet-market-be:build:development"
+            "buildTarget": "@vn-record-store/vn-record-store-be:build:development"
           },
           "production": {
-            "buildTarget": "@pet-market/pet-market-be:build:production"
+            "buildTarget": "@vn-record-store/vn-record-store-be:build:production"
           }
         }
       },

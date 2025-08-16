@@ -1,10 +1,10 @@
 {
-  "name": "@pet-market/pet-market-be-e2e",
+  "name": "@vn-record-store/vn-record-store-be-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "@pet-market/pet-market-be"
+      "@vn-record-store/vn-record-store-be"
     ],
     "targets": {
       "e2e": {
@@ -13,11 +13,11 @@
           "{projectRoot}/test-output/jest/coverage"
         ],
         "options": {
-          "jestConfig": "apps/pet-market-be-e2e/jest.config.ts",
+          "jestConfig": "apps/vn-record-store-be-e2e/jest.config.ts",
           "passWithNoTests": true
         },
         "dependsOn": [
-          "@pet-market/pet-market-be:build"
+          "@vn-record-store/vn-record-store-be:build"
         ]
       }
     }

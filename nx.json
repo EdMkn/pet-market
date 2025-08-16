@@ -50,7 +50,7 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/pet-market-be-e2e/**/*"]
+      "exclude": ["apps/vn-record-store-be-e2e/**/*"]
     },
     {
       "plugin": "@nx/playwright/plugin",
