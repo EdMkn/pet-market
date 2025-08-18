@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  # Development override for frontend with type generation
+  frontend:
+    build:
+      context: .
+      dockerfile: apps/vn-record-store-web/Dockerfile
+      target: build  # Stop at build stage for development
+    volumes:
+      # Mount source code for hot reload
+      - ./apps/vn-record-store-web/src:/app/apps/vn-record-store-web/src
+      # Mount generated types
+      - ./apps/vn-record-store-web/src/app/types:/app/apps/vn-record-store-web/src/app/types
+    command: ["sh", "-c", "npm run generate:types && npm run watch:types & npx nx serve vn-record-store-web --host 0.0.0.0"]
+    
+  # Type generator service (optional - runs independently)
+  type-generator:
+    build:
+      context: .
+      dockerfile: apps/vn-record-store-web/Dockerfile
+      target: base
+    volumes:
+      - .:/app
+    command: ["npm", "run", "watch:types"]
+    depends_on:
+      - backend 

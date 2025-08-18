@@ -1,6 +1,6 @@
 import { computed } from '@angular/core';
 import { signalStore, withState, withMethods, patchState, withComputed } from '@ngrx/signals';
-import { Album } from '@prisma/client'
+import { Album } from '../types/album.types'
 
 const CART_LOCALSTORAGE_KEY = 'vinyl_records_cart'
 

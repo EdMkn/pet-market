@@ -1,0 +1,11 @@
+node_modules
+dist
+build
+.tmp
+coverage
+*.spec.ts
+*.env
+*.local
+src/environments/environment*.ts
+.DS_Store
+Thumbs.db

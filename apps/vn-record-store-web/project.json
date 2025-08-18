@@ -61,7 +61,8 @@
           "buildTarget": "vn-record-store-web:build:production"
         },
         "development": {
-          "buildTarget": "vn-record-store-web:build:development"
+          "buildTarget": "vn-record-store-web:build:development",
+          "proxyConfig": "apps/vn-record-store-web/proxy.conf.json"
         }
       },
       "defaultConfiguration": "development"

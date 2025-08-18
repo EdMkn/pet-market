@@ -10,4 +10,12 @@ import { HeaderComponent } from './components/header/header.component';
 })
 export class AppComponent {
   title = 'vn-record-store-web';
+  
+  constructor() {
+    console.log('🚀 AppComponent initialized', {
+      platform: typeof window !== 'undefined' ? 'browser' : 'server',
+      location: typeof window !== 'undefined' ? window.location.href : 'SSR',
+      timestamp: new Date().toISOString()
+    });
+  }
 }

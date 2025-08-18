@@ -12,7 +12,10 @@ import { OrdersModule } from './orders/orders.module';
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'apps/vn-record-store-be/dist/schema.gql'),
+      autoSchemaFile: true,
+      playground: true,
+      introspection: true,
+      csrfPrevention: false,
     }),
     AlbumsModule,
     CheckoutModule,

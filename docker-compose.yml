@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: vn-record-store-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: vinyl_records_store
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./apps/vn-record-store-be/prisma/migrations:/docker-entrypoint-initdb.d
+    networks:
+      - vn-record-store-network
+
+  # NestJS Backend API
+  backend:
+    build:
+      context: .
+      dockerfile: apps/vn-record-store-be/Dockerfile
+    container_name: vn-record-store-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/vinyl_records_store
+      - STRIPE_SECRET=${STRIPE_SECRET:-sk_test_your_stripe_secret_key}
+      - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY:-pk_test_your_stripe_publishable_key}
+    depends_on:
+      - postgres
+    networks:
+      - vn-record-store-network
+    volumes:
+      - ./apps/vn-record-store-be/dist:/app/dist
+    command: ["sh", "-c", "npx prisma migrate deploy && node dist/main.js"]
+
+  # Database Seeding (runs automatically after backend starts)  
+  seeder:
+    build:
+      context: .
+      dockerfile: apps/vn-record-store-be/Dockerfile.seed
+    container_name: vn-record-store-seeder
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/vinyl_records_store
+    depends_on:
+      - backend
+    networks:
+      - vn-record-store-network
+    restart: "no"
+
+
+
+  # Angular Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: apps/vn-record-store-web/Dockerfile
+    container_name: vn-record-store-frontend
+    restart: unless-stopped
+    ports:
+      - "4200:4200"
+    environment:
+      - NODE_ENV=production
+      - PORT=4200
+      - API_URL=http://backend:3000/api
+      - GRAPHQL_URL=http://backend:3000/graphql
+    depends_on:
+      - backend
+    networks:
+      - vn-record-store-network
+
+  # Nginx Reverse Proxy (Optional)
+  nginx:
+    image: nginx:alpine
+    container_name: vn-record-store-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - vn-record-store-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  vn-record-store-network:
+    driver: bridge 

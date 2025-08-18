@@ -1,4 +1,4 @@
-export const albumsList = [
+const albumsList = [
   {
     name: 'Abbey Road',
     artist: 'The Beatles',
@@ -300,3 +300,5 @@ export const albumsList = [
     isFeatured: false,
   }
 ]; 
+
+module.exports = { albumsList }; 

@@ -1,6 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Album } from '@prisma/client'
+import { Album } from '../../types/album.types'
 
 @Component({
   selector: 'app-album-card',

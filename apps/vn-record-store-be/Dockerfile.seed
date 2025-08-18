@@ -1,0 +1,31 @@
+FROM node:20-alpine
+
+# Install dumb-init for proper signal handling
+RUN apk add --no-cache dumb-init
+
+# Create app directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY tsconfig*.json ./
+COPY nx.json ./
+
+# Install dependencies including ts-node
+RUN npm ci
+
+# Copy source code
+COPY . .
+
+# Generate Prisma client
+WORKDIR /app/apps/vn-record-store-be
+RUN npx prisma generate
+
+# Switch back to root
+WORKDIR /app
+
+# Set the entrypoint
+ENTRYPOINT ["dumb-init", "--"]
+
+# Run the JavaScript seed script
+CMD ["node", "./apps/vn-record-store-be/prisma/seed.js"] 

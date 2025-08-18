@@ -2,7 +2,12 @@
   "name": "@vinyl-records/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "generate:types": "node scripts/generate-frontend-types.js",
+    "watch:types": "node scripts/watch-types.js",
+    "prebuild:frontend": "npm run generate:types",
+    "build:frontend": "npx nx build vn-record-store-web --prod"
+  },
   "private": true,
   "devDependencies": {
     "@angular-devkit/build-angular": "~19.2.0",

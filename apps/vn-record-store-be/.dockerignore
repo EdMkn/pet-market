@@ -1,0 +1,30 @@
+# Node & dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+package-lock.json
+yarn.lock
+
+# Prisma
+.prisma
+*.db
+*.sqlite
+.env
+
+# Build artifacts
+dist
+build
+coverage
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+.dockerignore
+Dockerfile
+
+# Git
+.git
+.gitignore

@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import {patchState, signalStore, withMethods, withState} from '@ngrx/signals';
-import { Order, AlbumOrderItem, Album } from '@prisma/client';
+import { Order, AlbumOrderItem, Album } from '../types/album.types';
 import { Apollo, gql } from 'apollo-angular';
 import { tap } from 'rxjs';
 

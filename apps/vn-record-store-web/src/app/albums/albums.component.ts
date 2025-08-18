@@ -1,4 +1,4 @@
-import { afterNextRender, Component, inject } from '@angular/core';
+import { afterNextRender, Component, inject, PLATFORM_ID } from '@angular/core';
 import { AlbumStore } from '../stores/album.store';
 import { AlbumCardComponent } from '../components/album-card/album-card.component';
 import { FormsModule } from '@angular/forms';
@@ -17,16 +17,27 @@ export class AlbumsComponent {
   selectedGenre = '';
   albumStore = inject(AlbumStore);
   cartStore = inject(CartStore);
+  platformId = inject(PLATFORM_ID);
   searchSubject = new Subject<string>();
   destroyed = untilDestroyed();
 
   constructor() {
+    console.log('🔄 AlbumsComponent - Constructor called', {
+      platform: typeof window !== 'undefined' ? 'browser' : 'server',
+      location: typeof window !== 'undefined' ? window.location.href : 'SSR',
+      timestamp: new Date().toISOString()
+    });
+    
+    // Load albums immediately - the store will handle platform detection
     this.albumStore.loadAlbums();
+    
+    // Set up search after render (browser only)
     afterNextRender(() => {
+      console.log('🔄 AlbumsComponent - Setting up search after render');
       this.searchSubject
         .pipe(debounceTime(500), distinctUntilChanged(), this.destroyed())
         .subscribe((term) => {
-          console.log({ term });
+          console.log('🔍 Search term:', { term });
           this.albumStore.searchAlbums(term)
         });
     });

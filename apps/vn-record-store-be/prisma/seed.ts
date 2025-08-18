@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import { albumsList } from "./albumsList";
+const { PrismaClient } = require("@prisma/client");
+const { albumsList } = require("./albumsList");
 
 const prisma = new PrismaClient();
 
@@ -11,7 +11,7 @@ async function main() {
     select: { stripePriceId: true },
   });
   const existingAlbumPriceIds = new Set(
-    existingAlbums.map((a) => a.stripePriceId)
+    existingAlbums.map((a: { stripePriceId: string }) => a.stripePriceId)
   );
 
   console.log({ existingAlbums: existingAlbums.length });
