@@ -20,9 +20,8 @@ services:
 
   # NestJS Backend API
   backend:
-    build:
-      context: .
-      dockerfile: apps/vn-record-store-be/Dockerfile
+    # Use versioned image from Docker Hub instead of building locally
+    image: edmkn/vinyl-records-store-backend:v1.0.0
     container_name: vn-record-store-backend
     restart: unless-stopped
     ports:
@@ -43,9 +42,8 @@ services:
 
   # Database Seeding (runs automatically after backend starts)  
   seeder:
-    build:
-      context: .
-      dockerfile: apps/vn-record-store-be/Dockerfile.seed
+    # Use versioned image from Docker Hub instead of building locally
+    image: edmkn/vinyl-records-store-seeder:v1.0.0
     container_name: vn-record-store-seeder
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/vinyl_records_store
@@ -59,9 +57,8 @@ services:
 
   # Angular Frontend
   frontend:
-    build:
-      context: .
-      dockerfile: apps/vn-record-store-web/Dockerfile
+    # Use versioned image from Docker Hub instead of building locally
+    image: edmkn/vinyl-records-store-frontend:v1.0.0
     container_name: vn-record-store-frontend
     restart: unless-stopped
     ports:
