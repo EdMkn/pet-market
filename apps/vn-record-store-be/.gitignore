@@ -1,4 +1,22 @@
+# Node & dependencies
 node_modules
-# Keep environment variables out of version control
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+package-lock.json
+yarn.lock
+
+# Prisma
+.prisma
+*.db
+*.sqlite
 .env
-.env.backup
+
+# Build artifacts
+dist
+build
+coverage
+
+# OS files
+.DS_Store
+Thumbs.db
