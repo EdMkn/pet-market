@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -9,10 +9,9 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
   styles: []
 })
 export class ThemeSwitcherComponent implements OnInit {
-  
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
-  
-  ngOnInit() {
+  private platformId = inject(PLATFORM_ID);
+
+  ngOnInit(): void {
     // Only access localStorage in browser environment
     if (isPlatformBrowser(this.platformId)) {
       // Load saved theme from localStorage
