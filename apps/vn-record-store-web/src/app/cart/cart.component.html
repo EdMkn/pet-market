@@ -1,47 +1,47 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-8">
+<div class="min-h-screen bg-base-100 py-8">
   <div class="container mx-auto px-4">
     <div class="space-y-8">
       <div class="text-center mb-8">
-        <h1 class="text-4xl font-bold text-white mb-4">Votre Collection de Vinyles</h1>
-        <p class="text-gray-300 text-lg">Passez en revue vos albums sélectionnés</p>
+        <h1 class="text-4xl font-bold text-base-content mb-4">Votre Collection de Vinyles</h1>
+        <p class="text-base-content opacity-70 text-lg">Passez en revue vos albums sélectionnés</p>
       </div>
 
       @if(!cartStore.items().length){
       <!-- when there are no cart items -->
-      <div class="text-center py-16 bg-slate-800 rounded-lg">
+      <div class="text-center py-16 bg-base-200 rounded-lg">
         <div class="text-6xl mb-4">🎵</div>
-        <h3 class="text-2xl font-bold text-white mb-2">Votre panier est vide</h3>
-        <p class="text-gray-400 mb-6">Commencez à construire votre collection de vinyles aujourd'hui</p>
+        <h3 class="text-2xl font-bold text-base-content mb-2">Votre panier est vide</h3>
+        <p class="text-base-content opacity-60 mb-6">Commencez à construire votre collection de vinyles aujourd'hui</p>
         <a routerLink="/albums" class="btn btn-primary btn-lg">Parcourir les Albums</a>
       </div>
       } @else {
       <!-- cart view -->
-      <div class="bg-slate-800 rounded-lg p-6">
+      <div class="bg-base-200 rounded-lg p-6">
         <div class="overflow-x-auto">
           <table class="table w-full">
             <thead>
-              <tr class="border-b border-slate-700">
-                <th class="text-left text-gray-300 font-semibold">Album</th>
-                <th class="text-center text-gray-300 font-semibold">Prix</th>
-                <th class="text-center text-gray-300 font-semibold">Quantité</th>
-                <th class="text-center text-gray-300 font-semibold">Total</th>
-                <th class="text-center text-gray-300 font-semibold">Actions</th>
+              <tr class="border-b border-base-300">
+                <th class="text-left text-base-content opacity-70 font-semibold">Album</th>
+                <th class="text-center text-base-content opacity-70 font-semibold">Prix</th>
+                <th class="text-center text-base-content opacity-70 font-semibold">Quantité</th>
+                <th class="text-center text-base-content opacity-70 font-semibold">Total</th>
+                <th class="text-center text-base-content opacity-70 font-semibold">Actions</th>
               </tr>
             </thead>
             <tbody>
               @for (item of cartStore.items(); track item.id) {
-              <tr class="border-b border-slate-700">
+              <tr class="border-b border-base-300">
                 <td>
                   <div class="flex items-center gap-4">
                     <img [src]="item.image" [alt]="item.name" class="w-16 h-16 object-cover rounded">
                     <div>
-                      <h3 class="text-white font-semibold">{{ item.name }}</h3>
-                      <p class="text-gray-400 text-sm">{{ item.artist }}</p>
-                      <p class="text-gray-400 text-sm">{{ item.genre }} • {{ item.releaseYear }}</p>
+                      <h3 class="text-base-content font-semibold">{{ item.name }}</h3>
+                      <p class="text-base-content opacity-60 text-sm">{{ item.artist }}</p>
+                      <p class="text-base-content opacity-60 text-sm">{{ item.genre }} • {{ item.releaseYear }}</p>
                     </div>
                   </div>
                 </td>
-                <td class="text-center text-white">{{ item.price | number : '1.2-2' }} €</td>
+                <td class="text-center text-base-content">{{ item.price | number : '1.2-2' }} €</td>
                 <td class="text-center">
                   <div class="flex items-center justify-center gap-2">
                     <button 
@@ -50,7 +50,7 @@
                       [disabled]="item.quantity <= 1">
                       -
                     </button>
-                    <span class="text-white min-w-[2rem]">{{ item.quantity }}</span>
+                    <span class="text-base-content min-w-[2rem]">{{ item.quantity }}</span>
                     <button 
                       class="btn btn-sm btn-circle" 
                       (click)="cartStore.updateQuantity(item.id, item.quantity + 1)">
@@ -58,11 +58,11 @@
                     </button>
                   </div>
                 </td>
-                <td class="text-white font-semibold">{{ item.price * item.quantity | number : '1.2-2' }} €</td>
+                <td class="text-base-content font-semibold">{{ item.price * item.quantity | number : '1.2-2' }} €</td>
                 <td>
                   <button 
                       (click)="cartStore.removeFromCart(item.id)"
-                      class="btn btn-ghost btn-sm text-red-400 hover:text-red-300 hover:bg-red-900/20">Supprimer</button>
+                      class="btn btn-ghost btn-sm text-error hover:bg-error hover:bg-opacity-20">Supprimer</button>
                 </td>
               </tr>
               }
@@ -70,13 +70,13 @@
           </table>
         </div>
 
-        <div class="flex flex-col lg:flex-row justify-between items-center mt-8 pt-6 border-t border-slate-700">
+        <div class="flex flex-col lg:flex-row justify-between items-center mt-8 pt-6 border-t border-base-300">
           <div>
             <!-- cart total -->
-             <p class="text-2xl font-bold text-white">Total : {{ cartStore.totalAmount() | number : "1.2-2" }} €</p> 
+             <p class="text-2xl font-bold text-base-content">Total : {{ cartStore.totalAmount() | number : "1.2-2" }} €</p> 
           </div>
           <div class="flex flex-col sm:flex-row gap-4 mt-4 lg:mt-0">
-            <button (click)="cartStore.clearCart()" class="btn btn-outline text-white border-white hover:bg-white hover:text-slate-900">Vider le Panier</button>
+            <button (click)="cartStore.clearCart()" class="btn btn-outline">Vider le Panier</button>
             <a routerLink="/checkout" class="btn btn-primary btn-lg">Procéder au Paiement</a>
           </div>
         </div>
