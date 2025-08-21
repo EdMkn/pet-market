@@ -48,7 +48,7 @@ model AlbumOrderItem {
   albumId   String
   quantity  Int
   price     Float
-  order     Order   @relation(fields: [orderId], references: [id])
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   album     Album   @relation(fields: [albumId], references: [id])
 }
 
@@ -56,4 +56,5 @@ enum OrderStatus {
   PENDING
   STARTED_DELIVERY
   DELIVERED
+  PAYMENT_REQUIRED
 }
